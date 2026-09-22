@@ -42,7 +42,11 @@ if [[ -n "${APPVOLUME_NOTARY_PROFILE:-}" ]]; then
   xcrun notarytool submit "$ARCHIVE" --keychain-profile "$APPVOLUME_NOTARY_PROFILE" --wait
   xcrun stapler staple "$APP_BUNDLE"
   xcrun stapler validate "$APP_BUNDLE"
+  codesign --verify --deep --strict --verbose=2 "$APP_BUNDLE"
+  spctl --assess --type execute --verbose=2 "$APP_BUNDLE"
   rm "$ARCHIVE"
+else
+  echo "WARNING: signed package is not notarized; Gatekeeper may reject it." >&2
 fi
 
 ditto -c -k --keepParent "$APP_BUNDLE" "$ARCHIVE"

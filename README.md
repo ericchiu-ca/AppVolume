@@ -54,3 +54,5 @@ Quit normally before removing `AppVolume.app`. To also clear settings, delete th
 - [Notarizing macOS software before distribution](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution)
 
 The implementation also checked installed SDK headers `AudioHardware.h`, `AudioHardwareTapping.h`, and `CATapDescription.h`. Process tap creation and destruction have been available since macOS 14.2; this project targets macOS 26.
+
+No open-source license is currently granted for this repository.
