@@ -5,6 +5,24 @@ struct ApplicationVolumeRow: View {
     let onVolume: (Double) -> Void
     let onMute: () -> Void
 
+    private var displayedVolume: Double {
+        application.setting.muted ? 0 : application.setting.volume
+    }
+
+    private var speakerSymbol: String {
+        if application.setting.muted { return "speaker.slash.fill" }
+        switch displayedVolume {
+        case 0: return "speaker.fill"
+        case ..<34: return "speaker.wave.1.fill"
+        case ..<67: return "speaker.wave.2.fill"
+        default: return "speaker.wave.3.fill"
+        }
+    }
+
+    private var speakerSize: CGFloat {
+        12 + CGFloat(displayedVolume / 100) * 6
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(spacing: 9) {
@@ -28,11 +46,15 @@ struct ApplicationVolumeRow: View {
                     .font(.body.monospacedDigit())
                     .frame(width: 42, alignment: .trailing)
                 Button(action: onMute) {
-                    Image(systemName: application.setting.muted ? "speaker.slash.fill" : "speaker.wave.2")
-                        .frame(width: 20)
+                    Image(systemName: speakerSymbol)
+                        .font(.system(size: speakerSize, weight: .medium))
+                        .frame(width: 24, height: 24)
+                        .contentTransition(.symbolEffect(.replace))
+                        .animation(.easeOut(duration: 0.12), value: speakerSize)
                 }
                 .buttonStyle(.borderless)
                 .accessibilityLabel("\(application.setting.muted ? "Unmute" : "Mute") \(application.name)")
+                .accessibilityValue(application.setting.muted ? "Muted" : "\(Int(displayedVolume)) percent")
             }
             if let status = application.status {
                 Text(status)
