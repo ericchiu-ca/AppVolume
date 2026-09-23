@@ -10,7 +10,7 @@ Requires macOS 26 or later. The current build was tested on Apple Silicon with m
 
 AppVolume starts with control paused. Lower the system volume and play a quiet test sound, then choose **Resume Control** in the menu bar panel. Allow System Audio Capture if macOS prompts. The app does not request microphone, camera, Accessibility, or Full Disk Access permission. Choose **Pause Control** to restore original playback.
 
-Each app row's speaker button grows with its volume and shows more sound waves at higher levels. It remains a mute/unmute button; muting shows a small slashed speaker while retaining the saved volume.
+Each app row's speaker button grows with its volume up to the original v0.1.0 icon size and shows more sound waves at higher levels. It remains a mute/unmute button; muting shows a small slashed speaker while retaining the saved volume.
 
 ## Build from source
 

@@ -20,7 +20,7 @@ struct ApplicationVolumeRow: View {
     }
 
     private var speakerSize: CGFloat {
-        12 + CGFloat(displayedVolume / 100) * 6
+        9 + CGFloat(displayedVolume / 100) * 2.25
     }
 
     var body: some View {
@@ -48,8 +48,8 @@ struct ApplicationVolumeRow: View {
                 Button(action: onMute) {
                     Image(systemName: speakerSymbol)
                         .font(.system(size: speakerSize, weight: .medium))
-                        .frame(width: 24, height: 24)
                         .contentTransition(.symbolEffect(.replace))
+                        .frame(width: 20)
                         .animation(.easeOut(duration: 0.12), value: speakerSize)
                 }
                 .buttonStyle(.borderless)
